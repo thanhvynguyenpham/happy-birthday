@@ -23,7 +23,7 @@ const fetchData = () => {
       });
     });
 };
-
+const delay = ms => new Promise(res => setTimeout(res, ms));
 // Animation Timeline
 const animationTimeline = () => {
   // Spit chars that needs to be animated individually
@@ -154,15 +154,6 @@ const animationTimeline = () => {
       },
       "+=0.5"
     )
-    // .to(
-    //   ".idea-5 .smiley",
-    //   0.7,
-    //   {
-    //     rotation: 90,
-    //     x: 8
-    //   },
-    //   "+=0.4"
-    // )
     .to(
       ".idea-5",
       0.7,
@@ -172,29 +163,6 @@ const animationTimeline = () => {
       },
       "+=2"
     )
-    // .staggerFrom(
-    //   ".idea-6 span",
-    //   0.8,
-    //   {
-    //     scale: 3,
-    //     opacity: 0,
-    //     rotation: 15,
-    //     ease: Expo.easeOut
-    //   },
-    //   0.2
-    // )
-    // .staggerTo(
-    //   ".idea-6 span",
-    //   0.8,
-    //   {
-    //     scale: 3,
-    //     opacity: 0,
-    //     rotation: -15,
-    //     ease: Expo.easeOut
-    //   },
-    //   0.2,
-    //   "+=1"
-    // )
     .staggerFromTo(
       ".baloons img",
       2.5,
@@ -288,34 +256,10 @@ const animationTimeline = () => {
     .from(".tenth", 0.7, ideaTextTrans)
     .to(".tenth", 0.7, ideaTextTransLeave, "+=1.5")
     .staggerFrom(".eleventh p", 1, ideaTextTrans, 1.2)
-    // .to(
-    //   ".last-smile",
-    //   0.5,
-    //   {
-    //     rotation: 90
-    //   },
-    //   "+=1"
-    // )
-    // .to(
-    //   ".nine",
-    //   0.7,
-    //   {
-    //     opacity: 0,
-    //     y: 10
-    //   },
-    //   "+=2.5"
-    // )
 
   tl.seek("currentStep");
   // tl.timeScale(3);
 
-  // Restart Animation on click
-  const replyBtn = document.getElementById("replay");
-  // const cake = document.getElementById("fullcake");
-  replyBtn.addEventListener("click", () => {
-    tl.restart();
-    // cake.style.display = "block";
-  });
 };
 
 // Run fetch and animation in sequence
