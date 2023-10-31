@@ -29,14 +29,13 @@ const animationTimeline = () => {
   // Spit chars that needs to be animated individually
   const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
   const hbd = document.getElementsByClassName("wish-hbd")[0];
+  const audioplay = document.getElementById("music");
 
   textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
     .split("")
     .join("</span><span>")}</span`;
 
-  hbd.innerHTML = `<span>${hbd.innerHTML
-    .split("")
-    .join("</span><span>")}</span`;
+  hbd.innerHTML = `<span>${hbd.innerHTML}</span`;
 
   const ideaTextTrans = {
     opacity: 0,
@@ -98,6 +97,7 @@ const animationTimeline = () => {
       },
       "+=2"
     )
+    
     .from(".four", 0.7, {
       scale: 0.2,
       opacity: 0
@@ -129,8 +129,6 @@ const animationTimeline = () => {
     )
     .from(".idea-1", 0.7, ideaTextTrans)
     .to(".idea-1", 0.7, ideaTextTransLeave, "+=1.5")
-    .from(".idea-2", 0.7, ideaTextTrans)
-    .to(".idea-2", 0.7, ideaTextTransLeave, "+=1.5")
     .from(".idea-3", 0.7, ideaTextTrans)
     .to(".idea-3 strong", 0.5, {
       scale: 1.2,
@@ -139,6 +137,8 @@ const animationTimeline = () => {
       color: "#fff"
     })
     .to(".idea-3", 0.7, ideaTextTransLeave, "+=1.5")
+    .from(".idea-2", 0.7, ideaTextTrans)
+    .to(".idea-2", 0.7, ideaTextTransLeave, "+=1.5")
     .from(".idea-4", 0.7, ideaTextTrans)
     .to(".idea-4", 0.7, ideaTextTransLeave, "+=1.5")
     .from(
@@ -154,15 +154,15 @@ const animationTimeline = () => {
       },
       "+=0.5"
     )
-    .to(
-      ".idea-5 .smiley",
-      0.7,
-      {
-        rotation: 90,
-        x: 8
-      },
-      "+=0.4"
-    )
+    // .to(
+    //   ".idea-5 .smiley",
+    //   0.7,
+    //   {
+    //     rotation: 90,
+    //     x: 8
+    //   },
+    //   "+=0.4"
+    // )
     .to(
       ".idea-5",
       0.7,
@@ -172,39 +172,40 @@ const animationTimeline = () => {
       },
       "+=2"
     )
-    .staggerFrom(
-      ".idea-6 span",
-      0.8,
-      {
-        scale: 3,
-        opacity: 0,
-        rotation: 15,
-        ease: Expo.easeOut
-      },
-      0.2
-    )
-    .staggerTo(
-      ".idea-6 span",
-      0.8,
-      {
-        scale: 3,
-        opacity: 0,
-        rotation: -15,
-        ease: Expo.easeOut
-      },
-      0.2,
-      "+=1"
-    )
+    // .staggerFrom(
+    //   ".idea-6 span",
+    //   0.8,
+    //   {
+    //     scale: 3,
+    //     opacity: 0,
+    //     rotation: 15,
+    //     ease: Expo.easeOut
+    //   },
+    //   0.2
+    // )
+    // .staggerTo(
+    //   ".idea-6 span",
+    //   0.8,
+    //   {
+    //     scale: 3,
+    //     opacity: 0,
+    //     rotation: -15,
+    //     ease: Expo.easeOut
+    //   },
+    //   0.2,
+    //   "+=1"
+    // )
     .staggerFromTo(
       ".baloons img",
       2.5,
       {
         opacity: 0.9,
-        y: 1400
+        y: 1400,
       },
       {
         opacity: 1,
-        y: -1000
+        y: -1000,
+        onStart: function() {audioplay.play();},
       },
       0.2
     )
@@ -223,7 +224,7 @@ const animationTimeline = () => {
     .from(".hat", 0.5, {
       x: -100,
       y: 350,
-      rotation: -180,
+      rotation: -120,
       opacity: 0
     })
     .staggerFrom(
@@ -272,7 +273,7 @@ const animationTimeline = () => {
         visibility: "visible",
         opacity: 0,
         scale: 80,
-        repeat: 3,
+        repeat: 2,
         repeatDelay: 1.4
       },
       0.3
@@ -282,23 +283,38 @@ const animationTimeline = () => {
       y: 30,
       zIndex: "-1"
     })
-    .staggerFrom(".nine p", 1, ideaTextTrans, 1.2)
-    .to(
-      ".last-smile",
-      0.5,
-      {
-        rotation: 90
-      },
-      "+=1"
-    );
+    .from(".nine", 0.7, ideaTextTrans)
+    .to(".nine", 0.7, ideaTextTransLeave, "+=1.5")
+    .from(".tenth", 0.7, ideaTextTrans)
+    .to(".tenth", 0.7, ideaTextTransLeave, "+=1.5")
+    .staggerFrom(".eleventh p", 1, ideaTextTrans, 1.2)
+    // .to(
+    //   ".last-smile",
+    //   0.5,
+    //   {
+    //     rotation: 90
+    //   },
+    //   "+=1"
+    // )
+    // .to(
+    //   ".nine",
+    //   0.7,
+    //   {
+    //     opacity: 0,
+    //     y: 10
+    //   },
+    //   "+=2.5"
+    // )
 
-  // tl.seek("currentStep");
-  // tl.timeScale(2);
+  tl.seek("currentStep");
+  // tl.timeScale(3);
 
   // Restart Animation on click
   const replyBtn = document.getElementById("replay");
+  // const cake = document.getElementById("fullcake");
   replyBtn.addEventListener("click", () => {
     tl.restart();
+    // cake.style.display = "block";
   });
 };
 
